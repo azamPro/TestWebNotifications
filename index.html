@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Basic Web Page</title>
+    <title>Web Notifications Demo</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="My Basic Web Page">
+    <meta name="apple-mobile-web-app-title" content="Web Notifications">
     <link rel="apple-touch-icon" href="icon-192x192.png">
     <meta name="theme-color" content="#4a6fa5">
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -28,59 +28,51 @@
 </head>
 <body>
     <header>
-        <h1>Welcome to My Web Page</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+        <h1>Web Notifications Demo</h1>
     </header>
 
     <main>
-        <section id="home">
-            <h2>Home</h2>
-            <p>This is a simple web page created with native web technologies.</p>
-            <button id="changeColorBtn">Change Background</button>
-            <button id="notificationBtn" class="notification-btn">Subscribe to Notifications</button>
+        <section id="notification-demo">
+            <h2>Safari Web Push Notifications</h2>
+            <p>This demo showcases web push notifications with OneSignal, including support for iOS/iPadOS 16.4+.</p>
+            
+            <div class="notification-actions">
+                <button id="notificationBtn" class="notification-btn">Subscribe to Notifications</button>
+                <div id="notification-status" class="status-message"></div>
+            </div>
+
+            <div class="card">
+                <h3>Notification Status</h3>
+                <div id="permission-status">Checking permission status...</div>
+            </div>
+
             <div class="add-to-home">
-                <p>To receive Safari notifications on iOS, add this website to your home screen:</p>
+                <h3>iOS Safari Users</h3>
+                <p>To receive notifications on iOS/iPadOS (16.4+), you must add this website to your home screen:</p>
                 <ol>
                     <li>Tap the share icon <span class="ios-share">⎙</span> at the bottom of the screen</li>
                     <li>Scroll down and tap "Add to Home Screen"</li>
                     <li>Tap "Add" in the top-right corner</li>
+                    <li>Open the app from your home screen</li>
+                    <li>Then click "Subscribe to Notifications"</li>
                 </ol>
             </div>
-        </section>
 
-        <section id="about">
-            <h2>About</h2>
-            <p>This page demonstrates basic HTML, CSS, and JavaScript functionality.</p>
-        </section>
-
-        <section id="contact">
-            <h2>Contact</h2>
-            <form id="contactForm">
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message:</label>
-                    <textarea id="message" rows="4" required></textarea>
-                </div>
-                <button type="submit">Send Message</button>
-            </form>
+            <div class="card">
+                <h3>How It Works</h3>
+                <p>This implementation uses:</p>
+                <ul>
+                    <li>OneSignal SDK for notification handling</li>
+                    <li>Web App Manifest for PWA capabilities</li>
+                    <li>Service Worker for offline support & notifications</li>
+                    <li>Special handling for iOS/iPad Safari</li>
+                </ul>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2023 My Web Page. All rights reserved.</p>
+        <p>Web Notifications Demo - Powered by OneSignal</p>
     </footer>
 
     <script src="script.js"></script>

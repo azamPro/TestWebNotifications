@@ -1,7 +1,7 @@
 {
-  "name": "My Basic Web Page",
-  "short_name": "Basic Web",
-  "description": "A simple web page with notification capabilities",
+  "name": "Web Notifications Demo",
+  "short_name": "Notifications",
+  "description": "A demo of web push notifications using OneSignal, including Safari on iOS",
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#f8f9fa",
