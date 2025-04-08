@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.getElementById('contactForm');
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('nav a');
+    const notificationBtn = document.getElementById('notificationBtn');
 
     // Background color changer
     const colors = ['#f8f9fa', '#e9ecef', '#dee2e6', '#ced4da', '#adb5bd'];
@@ -13,6 +14,64 @@ document.addEventListener('DOMContentLoaded', () => {
         colorIndex = (colorIndex + 1) % colors.length;
         document.body.style.backgroundColor = colors[colorIndex];
     });
+
+    // OneSignal Notification Subscription
+    notificationBtn.addEventListener('click', async () => {
+        try {
+            // Wait for OneSignal to be ready
+            await new Promise(resolve => {
+                if (window.OneSignal) {
+                    resolve();
+                } else {
+                    window.OneSignalDeferred = window.OneSignalDeferred || [];
+                    window.OneSignalDeferred.push(() => {
+                        resolve();
+                    });
+                }
+            });
+
+            // Request notification permission through OneSignal
+            const notificationPermission = await window.OneSignal.Notifications.permission;
+            
+            if (notificationPermission) {
+                // Already subscribed
+                alert('You are already subscribed to notifications!');
+            } else {
+                // Request permission
+                await window.OneSignal.Notifications.requestPermission();
+                
+                // Check if permission was granted
+                const newPermission = await window.OneSignal.Notifications.permission;
+                if (newPermission) {
+                    alert('Thank you for subscribing to notifications!');
+                    notificationBtn.textContent = 'Notifications Enabled';
+                    notificationBtn.disabled = true;
+                    
+                    // Send a welcome notification
+                    sendTestNotification();
+                } else {
+                    alert('Notification permission was denied. Please enable notifications in your browser settings.');
+                }
+            }
+        } catch (error) {
+            console.error('Error setting up notifications:', error);
+            alert('There was an error setting up notifications. Please try again later.');
+        }
+    });
+
+    // Function to send a test notification
+    async function sendTestNotification() {
+        try {
+            // This would typically be done server-side in a production app
+            // Here we're just demonstrating the client-side capability
+            if (window.OneSignal) {
+                console.log('Sending test notification...');
+                // In a real app, you would use the OneSignal API endpoint to send notifications
+            }
+        } catch (error) {
+            console.error('Error sending notification:', error);
+        }
+    }
 
     // Form submission
     contactForm.addEventListener('submit', (e) => {

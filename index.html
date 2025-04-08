@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Basic Web Page</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
+          appId: "e940465e-7d23-4a39-9360-c883113b5d46",
+        });
+      });
+    </script>
 </head>
 <body>
     <header>
@@ -23,6 +32,7 @@
             <h2>Home</h2>
             <p>This is a simple web page created with native web technologies.</p>
             <button id="changeColorBtn">Change Background</button>
+            <button id="notificationBtn" class="notification-btn">Subscribe to Notifications</button>
         </section>
 
         <section id="about">
