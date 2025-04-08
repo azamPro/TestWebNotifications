@@ -6,6 +6,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('nav a');
     const notificationBtn = document.getElementById('notificationBtn');
 
+    // Check if running as installed PWA on iOS
+    const isInStandaloneMode = () => 
+        (window.matchMedia('(display-mode: standalone)').matches) || 
+        (window.navigator.standalone) || 
+        document.referrer.includes('android-app://');
+
+    // Show/hide "Add to Home Screen" instructions
+    const addToHomeInstructions = document.querySelector('.add-to-home');
+    if (addToHomeInstructions) {
+        // Only show add to home instructions on iOS Safari and not when already in standalone mode
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+        
+        if (!(isIOS && isSafari) || isInStandaloneMode()) {
+            addToHomeInstructions.style.display = 'none';
+        }
+    }
+
     // Background color changer
     const colors = ['#f8f9fa', '#e9ecef', '#dee2e6', '#ced4da', '#adb5bd'];
     let colorIndex = 0;
@@ -18,6 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // OneSignal Notification Subscription
     notificationBtn.addEventListener('click', async () => {
         try {
+            // Check if running as PWA on iOS
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            
+            if (isIOS && !isInStandaloneMode()) {
+                alert('To receive notifications on iOS devices, please add this website to your home screen first, then open it from your home screen.');
+                return;
+            }
+            
             // Wait for OneSignal to be ready
             await new Promise(resolve => {
                 if (window.OneSignal) {
@@ -47,6 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     notificationBtn.textContent = 'Notifications Enabled';
                     notificationBtn.disabled = true;
                     
+                    // Get user ID to identify this device/user
+                    const userId = await window.OneSignal.User.getOneSignalId();
+                    console.log('OneSignal User ID:', userId);
+                    
                     // Send a welcome notification
                     sendTestNotification();
                 } else {
@@ -66,7 +96,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Here we're just demonstrating the client-side capability
             if (window.OneSignal) {
                 console.log('Sending test notification...');
-                // In a real app, you would use the OneSignal API endpoint to send notifications
+                
+                // In iOS/Safari, we can't trigger notifications directly from the client
+                // However, we can show a message indicating success
+                if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+                    console.log('On iOS, notifications must be sent from the server');
+                }
             }
         } catch (error) {
             console.error('Error sending notification:', error);

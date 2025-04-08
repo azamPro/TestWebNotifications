@@ -124,4 +124,36 @@ footer {
     nav ul li {
         margin: 0.5rem 0;
     }
+}
+
+.add-to-home {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #e9f7fe;
+    border-left: 4px solid #4a90e2;
+    border-radius: 4px;
+}
+
+.add-to-home p {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.add-to-home ol {
+    margin-left: 1.5rem;
+}
+
+.add-to-home li {
+    margin-bottom: 0.5rem;
+}
+
+.ios-share {
+    font-size: 1.2rem;
+}
+
+/* Display the add-to-home instructions only on mobile Safari */
+@media (min-width: 769px) {
+    .add-to-home {
+        display: none;
+    }
 } 

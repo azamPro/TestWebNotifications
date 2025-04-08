@@ -5,12 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Basic Web Page</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="My Basic Web Page">
+    <link rel="apple-touch-icon" href="icon-192x192.png">
+    <meta name="theme-color" content="#4a6fa5">
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
       window.OneSignalDeferred = window.OneSignalDeferred || [];
       OneSignalDeferred.push(async function(OneSignal) {
         await OneSignal.init({
           appId: "e940465e-7d23-4a39-9360-c883113b5d46",
+          safari_web_id: "web.onesignal.auto.e940465e-7d23-4a39-9360-c883113b5d46",
+          notifyButton: {
+            enable: true,
+          },
+          allowLocalhostAsSecureOrigin: true,
         });
       });
     </script>
@@ -33,6 +44,14 @@
             <p>This is a simple web page created with native web technologies.</p>
             <button id="changeColorBtn">Change Background</button>
             <button id="notificationBtn" class="notification-btn">Subscribe to Notifications</button>
+            <div class="add-to-home">
+                <p>To receive Safari notifications on iOS, add this website to your home screen:</p>
+                <ol>
+                    <li>Tap the share icon <span class="ios-share">⎙</span> at the bottom of the screen</li>
+                    <li>Scroll down and tap "Add to Home Screen"</li>
+                    <li>Tap "Add" in the top-right corner</li>
+                </ol>
+            </div>
         </section>
 
         <section id="about">
@@ -65,5 +84,19 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Register service worker for Progressive Web App functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/OneSignalSDKWorker.js')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(function(error) {
+                        console.log('ServiceWorker registration failed: ', error);
+                    });
+            });
+        }
+    </script>
 </body>
 </html> 
