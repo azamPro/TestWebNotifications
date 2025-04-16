@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
             
             if (isIOS && !isInStandaloneMode()) {
-                updateStatus('To receive notifications on iOS devices, please add this website to your home screen first, then open it from your home screen.', 'warning');
+                updateStatus('لتفعيل الإشعارات على أجهزة iOS، يُرجى إضافة هذا الموقع إلى الشاشة الرئيسية أولاً، ثم فتحه من الشاشة الرئيسية.', 'warning');
                 return;
             }
             
@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error setting up notifications:', error);
             updateStatus('There was an error setting up notifications. Please try again later.', 'error');
+            
         }
     });
 
@@ -112,11 +113,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Check if permission is denied or not yet requested
                 const nativePermission = Notification.permission;
                 if (nativePermission === 'denied') {
-                    permissionStatus.textContent = 'BLOCKED: Notifications are blocked in your browser settings';
+                    permissionStatus.textContent = 'محظور: تم حظر الإشعارات من إعدادات المتصفح';
                     permissionStatus.className = 'status-denied';
                 } else {
-                    permissionStatus.textContent = 'NOT SUBSCRIBED: Click the button above to subscribe';
-                    permissionStatus.className = 'status-default';
+                    permissionStatus.textContent = 'غير مشترك: اضغط على الزر أعلاه للاشتراك';
+                    permissionStatus.className = 'status-denied';
                 }
             }
         } catch (error) {
