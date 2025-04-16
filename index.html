@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Notifications Demo</title>
+    <title>حفل مشاريع التخرج</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Web Notifications">
+    <meta name="apple-mobile-web-app-title" content="حفل المشاريع">
     <link rel="apple-touch-icon" href="icon-192x192.png">
     <meta name="theme-color" content="#4a6fa5">
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -25,60 +25,41 @@
         });
       });
     </script>
-    
 </head>
 <body>
-    <header>
-        <h1>Web Notifications Demo</h1>
-    </header>
-
     <main>
         <section id="notification-demo">
-            <h2>Safari Web Push Notifications</h2>
-            <p>This demo showcases web push notifications with OneSignal, including support for iOS/iPadOS 16.4+.</p>
-            
+            <div class="intro-header">
+                <h2>مرحبا بك في حفل مشاريع التخرج</h2>
+                <p>ستعيش الآن تجربة حية لمعرفة كل ما يحدث في الحفل</p>
+            </div>
+
             <div class="notification-actions">
-                <button id="notificationBtn" class="notification-btn">Subscribe to Notifications</button>
+                <button id="notificationBtn" class="notification-btn">تفعيل الإشعارات</button>
                 <div id="notification-status" class="status-message"></div>
             </div>
 
             <div class="card">
-                <h3>Notification Status</h3>
-                <div id="permission-status">Checking permission status...</div>
+                <h3>حالة الإشعارات</h3>
+                <div id="permission-status">جارٍ التحقق من حالة الإذن...</div>
             </div>
 
             <div class="add-to-home">
-                <h3>iOS Safari Users</h3>
-                <p>To receive notifications on iOS/iPadOS (16.4+), you must add this website to your home screen:</p>
+                <h3>يجب استخدام Safari على أجهزة iOS</h3>
+                <p>لتفعيل الإشعارات على iOS قم بإضافة الموقع إلى الشاشة الرئيسية باتباع الخطوات التالية:</p>
                 <ol>
-                    <li>Tap the share icon <span class="ios-share">⎙</span> at the bottom of the screen</li>
-                    <li>Scroll down and tap "Add to Home Screen"</li>
-                    <li>Tap "Add" in the top-right corner</li>
-                    <li>Open the app from your home screen</li>
-                    <li>Then click "Subscribe to Notifications"</li>
+                    <li>اضغط على زر المشاركة <span class="ios-share">⎙</span> في أسفل الشاشة</li>
+                    <li>اختر "إضافة إلى الشاشة الرئيسية"</li>
+                    <li>اضغط "إضافة" في الزاوية العليا اليمنى</li>
+                    <li>افتح الموقع من الشاشة الرئيسية</li>
+                    <li>ثم اضغط على "تفعيل الإشعارات"</li>
                 </ol>
-            </div>
-
-            <div class="card">
-                <h3>How It Works</h3>
-                <p>This implementation uses:</p>
-                <ul>
-                    <li>OneSignal SDK for notification handling</li>
-                    <li>Web App Manifest for PWA capabilities</li>
-                    <li>Service Worker for offline support & notifications</li>
-                    <li>Special handling for iOS/iPad Safari</li>
-                </ul>
             </div>
         </section>
     </main>
 
-    <footer>
-        <p>Web Notifications Demo - Powered by OneSignal</p>
-    </footer>
-
     <script src="script.js"></script>
     <script>
-        // Register service worker for Progressive Web App functionality
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('/OneSignalSDKWorker.js')
@@ -92,4 +73,4 @@
         }
     </script>
 </body>
-</html> 
+</html>
