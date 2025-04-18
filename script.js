@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Get elements
     const notificationBtn = document.getElementById('notificationBtn');
-    const notificationStatus = document.getElementById('notification-status');
     const permissionStatus = document.getElementById('permission-status');
 
     // Check if running as installed PWA on iOS
@@ -32,56 +31,42 @@ document.addEventListener('DOMContentLoaded', () => {
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
             
             if (isIOS && !isInStandaloneMode()) {
-                updateStatus('لتفعيل الإشعارات على أجهزة iOS، يُرجى إضافة هذا الموقع إلى الشاشة الرئيسية أولاً، ثم فتحه من الشاشة الرئيسية.', 'warning');
+                updateStatus('لتفعيل الإشعارات على أجهزة iOS، يُرجى إضافة هذا الموقع إلى الشاشة الرئيسية أولاً، ثم فتحه من الشاشة الرئيسية.', 'denied');
                 return;
             }
             
-            // Wait for OneSignal to be ready
-            await new Promise(resolve => {
-                if (window.OneSignal) {
-                    resolve();
-                } else {
-                    window.OneSignalDeferred = window.OneSignalDeferred || [];
-                    window.OneSignalDeferred.push(() => {
-                        resolve();
-                    });
-                }
-            });
+            updateStatus('طلب تفعيل الإشعارات..', 'info');
 
-            // Show requesting status
-            updateStatus('Requesting permission...', 'info');
+            // Wait for OneSignal to be ready
+            console.log("Debugging: ", "Checking with OneSignal");
+            await CallOneSignal();
 
             // Request notification permission through OneSignal
             const notificationPermission = await window.OneSignal.Notifications.permission;
             
             if (notificationPermission) {
-                // Already subscribed
-                updateStatus('You are already subscribed to notifications!', 'success');
+                updateStatus('انت مشترك من قبل!', 'granted'); // You are already subscribed to notifications!
             } else {
                 // Request permission
-                await window.OneSignal.Notifications.requestPermission();
-                
-                // Check if permission was granted
+                console.log("Debugging: ", "Requesting Permission...");
                 const newPermission = await window.OneSignal.Notifications.permission;
                 if (newPermission) {
-                    updateStatus('Successfully subscribed to notifications!', 'success');
-                    notificationBtn.textContent = 'Notifications Enabled';
-                    notificationBtn.disabled = true;
-                    
+
                     // Get user ID to identify this device/user
                     const userId = await window.OneSignal.User.getOneSignalId();
                     console.log('OneSignal User ID:', userId);
                     
                     // Update permission status display
                     checkNotificationPermission();
+
                 } else {
-                    updateStatus('Notification permission was denied. Please enable notifications in your browser settings.', 'error');
+                    updateStatus('تم رفض طلب الإشعارات الرجاء تفعيل الإشعارات في الإعدادات', 'denied'); // Notification permission was denied. Please enable notifications in your browser settings.
                     checkNotificationPermission();
                 }
             }
         } catch (error) {
             console.error('Error setting up notifications:', error);
-            updateStatus('There was an error setting up notifications. Please try again later.', 'error');
+            updateStatus('There was an error setting up notifications. Please try again later.', 'denied');
             
         }
     });
@@ -89,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check notification permission and update UI
     async function checkNotificationPermission() {
         try {
-            // Wait for OneSignal to be ready
             await new Promise(resolve => {
                 if (window.OneSignal) {
                     resolve();
@@ -100,45 +84,55 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             });
-
-            // Get current permission state
-            const permission = await window.OneSignal.Notifications.permission;
-            
+            // 🔧 Use try/catch for permission access
+            let permission;
+            try {
+                permission = await window.OneSignal.Notifications.permission;
+            } catch (e) {
+                console.warn("Permission getter threw an error:", e);
+                return;
+            }
+    
             if (permission) {
-                permissionStatus.textContent = 'GRANTED: You are subscribed to notifications';
-                permissionStatus.className = 'status-granted';
-                notificationBtn.textContent = 'Notifications Enabled';
+                updateStatus('تم الاشتراك بنجاح!', 'success'); // Successfully subscribed to notifications!
+                notificationBtn.textContent = 'الإشعارات مفعلة'; // Notifications Enabled
                 notificationBtn.disabled = true;
             } else {
-                // Check if permission is denied or not yet requested
                 const nativePermission = Notification.permission;
                 if (nativePermission === 'denied') {
-                    permissionStatus.textContent = 'محظور: تم حظر الإشعارات من إعدادات المتصفح';
-                    permissionStatus.className = 'status-denied';
+                    updateStatus('محظور: تم حظر الإشعارات من إعدادات المتصفح', 'denied')
                 } else {
-                    permissionStatus.textContent = 'غير مشترك: اضغط على الزر أعلاه للاشتراك';
-                    permissionStatus.className = 'status-denied';
+                    updateStatus('غير مشترك: اضغط على الزر أعلاه للاشتراك', 'denied')
                 }
             }
         } catch (error) {
             console.error('Error checking notification permission:', error);
-            permissionStatus.textContent = 'Error checking notification permission';
+            // permissionStatus.textContent = 'Error checking notification permission';
+            updateStatus('حصل خطأ! حاول مرة اخرى', 'denied')
         }
     }
 
     // Update status message
     function updateStatus(message, type) {
-        notificationStatus.textContent = message;
-        
-        // Optional: add styling based on message type
-        notificationStatus.className = 'status-message';
+        permissionStatus.textContent = message;
+        permissionStatus.className = `status-${type}`
         if (type) {
-            notificationStatus.classList.add(`status-${type}`);
+            permissionStatus.classList.add(`status-${type}`);
         }
-        
-        // For error and warning, also show an alert for better visibility
-        if (type === 'error' || type === 'warning') {
-            alert(message);
-        }
+    }
+
+    async function CallOneSignal(){
+        new Promise(resolve => {
+            if (window.OneSignal) {
+                resolve();
+                console.log("Debugging: ", "OneSignal is ready");
+            } else {
+                console.log("Debugging: ", "OneSignal is NOT ready something went wrong...");
+                window.OneSignalDeferred = window.OneSignalDeferred || [];
+                window.OneSignalDeferred.push(() => {
+                    resolve();
+                });
+            }
+        });
     }
 }); 

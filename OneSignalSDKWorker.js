@@ -8,8 +8,8 @@ const urlsToCache = [
   '/styles.css',
   '/script.js',
   '/manifest.json',
-  '/icon-192x192.png',
-  '/icon-512x512.png'
+  '/assets/icon-192x192.png',
+  '/assets/icon-512x512.png'
 ];
 
 self.addEventListener('install', event => {

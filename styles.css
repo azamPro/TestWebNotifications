@@ -2,30 +2,27 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
 }
+
+
 
 body {
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
     font-family: 'Cairo', sans-serif;
     line-height: 1.6;
     color: #333;
-    /* background-color: #f8f9fa;
-    background-image: url('assets/background.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat; */
-    z-index: -1;
     background: radial-gradient(circle at top, #4a6fa5, #1a1a2e);
-
+    position: relative;
+    height: 100vh;
 }
 body::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.3); /* black with 50% opacity */
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: -1;
-  }
+}
+
 
 header {
     background-color: #4a6fa5;
@@ -69,9 +66,7 @@ section {
 }
 
 h2 {
-    
     font-size: 2.5rem;
-    /* font-weight: 800; */
     color: #ffffff;
     text-align: center;
     margin-bottom: 1rem;
@@ -97,12 +92,18 @@ h2 + p {
     padding: 2rem;
     border-radius: 12px;
     margin-bottom: 2rem;
+    border: 2px solid transparent;
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+        linear-gradient(0deg, #1b2233, #2a3b5a); /* Original 3a4a6b  4a6fa5*/
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
 button {
     font-family: 'Cairo', sans-serif;
-    background-color: #4a6fa5;
     color: white;
     border: none;
     padding: 0.75rem 1.5rem;
@@ -124,18 +125,18 @@ button:disabled {
 }
 
 .notification-btn {
-    background-color: #28a745;
+    background-color: #4F9D69;
     font-size: 1.1rem;
     padding: 0.85rem 1.75rem;
     font-weight: 500;
 }
 
 .notification-btn:hover {
-    background-color: #218838;
+    background-color: #44885B;
 }
 
 .card {
-    background-color: #ffffff; /* keep white or try #f4f4f4 for a soft light gray */
+    background-color: #FFFCF9;
     border-radius: 8px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
     padding: 1.5rem;
@@ -143,17 +144,15 @@ button:disabled {
 }
 
 .card h3 {
-    color: #2c3e50; /* deep gray-blue for contrast */
+    color: #2c3e50;
 }
 
 .add-to-home {
     margin: 1.5rem 0;
     padding: 1.5rem;
-    background-color: #e9f7fe;
-    border-left: 4px solid #4a90e2;
     border-radius: 4px;
-    background-color: #fff8e1; /* soft warm highlight */
-    border-left: 4px solid #ffc107; /* golden yellow border */
+    background-color: #fff8e1;
+    border-left: 4px solid #ffc107;
     color: #333;
     box-shadow: 0 4px 16px rgba(0,0,0,0.15);
 }
@@ -188,13 +187,6 @@ button:disabled {
     margin: 1.5rem 0;
 }
 
-.status-message {
-    margin-top: 0.75rem;
-    font-weight: 300;
-    min-height: 24px;
-    color: white;
-}
-
 #permission-status {
     font-weight: 500;
     padding: 0.5rem;
@@ -207,21 +199,13 @@ button:disabled {
 }
 
 .status-denied {
-    background-color: #f8d7da;
-    color: #721c24;
+    background-color: #F3A095;
+    color: #000000;
 }
 
-.status-default {
+.status-info {
     background-color: #fff3cd;
     color: #856404;
-}
-
-footer {
-    text-align: center;
-    padding: 1.5rem;
-    background-color: #4a6fa5;
-    color: white;
-    margin-top: 2rem;
 }
 
 @media (max-width: 768px) {
@@ -232,6 +216,10 @@ footer {
     nav ul li {
         margin: 0.5rem 0;
     }
+
+    body {
+        height: 100%;
+    }
 }
 
 /* Display the add-to-home instructions only on mobile devices */
@@ -241,4 +229,4 @@ footer {
         margin-left: auto;
         margin-right: auto;
     }
-} 
+}
