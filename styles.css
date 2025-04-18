@@ -94,6 +94,13 @@ h2 + p {
     padding: 2rem;
     border-radius: 12px;
     margin-bottom: 2rem;
+    border: 2px solid transparent;
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        linear-gradient(0deg, #1b2233, #2a3b5a); /* Original 3a4a6b  4a6fa5*/
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
