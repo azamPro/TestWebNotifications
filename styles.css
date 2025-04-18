@@ -2,30 +2,27 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
 }
+
+
 
 body {
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
     font-family: 'Cairo', sans-serif;
     line-height: 1.6;
     color: #333;
-    /* background-color: #f8f9fa;
-    background-image: url('assets/background.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat; */
-    z-index: -1;
     background: radial-gradient(circle at top, #4a6fa5, #1a1a2e);
-
+    position: relative;
+    height: 100vh;
 }
 body::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.3); /* black with 50% opacity */
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: -1;
-  }
+}
+
 
 header {
     background-color: #4a6fa5;
@@ -143,17 +140,15 @@ button:disabled {
 }
 
 .card h3 {
-    color: #2c3e50; /* deep gray-blue for contrast */
+    color: #2c3e50;
 }
 
 .add-to-home {
     margin: 1.5rem 0;
     padding: 1.5rem;
-    background-color: #e9f7fe;
-    border-left: 4px solid #4a90e2;
     border-radius: 4px;
-    background-color: #fff8e1; /* soft warm highlight */
-    border-left: 4px solid #ffc107; /* golden yellow border */
+    background-color: #fff8e1;
+    border-left: 4px solid #ffc107;
     color: #333;
     box-shadow: 0 4px 16px rgba(0,0,0,0.15);
 }
@@ -216,14 +211,6 @@ button:disabled {
     color: #856404;
 }
 
-footer {
-    text-align: center;
-    padding: 1.5rem;
-    background-color: #4a6fa5;
-    color: white;
-    margin-top: 2rem;
-}
-
 @media (max-width: 768px) {
     nav ul {
         flex-direction: column;
@@ -231,6 +218,10 @@ footer {
     
     nav ul li {
         margin: 0.5rem 0;
+    }
+
+    body {
+        height: 100%;
     }
 }
 
@@ -241,4 +232,5 @@ footer {
         margin-left: auto;
         margin-right: auto;
     }
-} 
+    
+}
