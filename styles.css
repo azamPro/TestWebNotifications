@@ -13,7 +13,9 @@ body {
     color: #333;
     background: radial-gradient(circle at top, #4a6fa5, #1a1a2e);
     position: relative;
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 body::before {
     content: '';
@@ -182,12 +184,6 @@ button:disabled:hover {
 .status-info {
     background-color: #fff3cd;
     color: #856404;
-}
-
-@media (max-width: 768px) {
-    body {
-        height: 100%;
-    }
 }
 
 /* Display the add-to-home instructions only on mobile devices */
