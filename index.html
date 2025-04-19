@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>حفل مشاريع التخرج</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="/assets/facicon-500x500.png" type="image/png">
     <link rel="manifest" href="manifest.json">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -16,7 +17,7 @@
       window.OneSignalDeferred = window.OneSignalDeferred || [];
       OneSignalDeferred.push(async function(OneSignal) {
         await OneSignal.init({
-          appId: "25ed62bf-67ca-4720-b1dc-a4613d7de1b7",
+          appId: "edcedcb7-ca83-4e15-ae44-6b6ac8e30bd2",
           safari_web_id: "web.onesignal.auto.25ed62bf-67ca-4720-b1dc-a4613d7de1b7",
           notifyButton: {
             enable: false,
@@ -28,33 +29,31 @@
 </head>
 <body>
     <main>
-        <section id="notification-demo">
-            <div class="intro-header">
-                <h2>مرحبا بك في حفل مشاريع التخرج</h2>
-                <p>ستعيش الآن تجربة حية لمعرفة كل ما يحدث في الحفل</p>
-            </div>
+        <div class="intro-header">
+            <h2>مرحبا بك في حفل مشاريع التخرج</h2>
+            <p>ستعيش الآن تجربة حية لمعرفة كل ما يحدث في الحفل</p>
+        </div>
 
-            <div class="notification-actions">
-                <button id="notificationBtn" class="notification-btn">تفعيل الإشعارات</button>
-            </div>
+        <div class="notification-actions">
+            <button id="notificationBtn" class="notification-btn">تفعيل الإشعارات</button>
+        </div>
 
-            <div class="card">
-                <h3>حالة الإشعارات</h3>
-                <div id="permission-status">جارٍ التحقق من حالة الإذن...</div>
-            </div>
+        <div class="card">
+            <h3>حالة الإشعارات</h3>
+            <div id="permission-status">جارٍ التحقق من حالة الإذن...</div>
+        </div>
 
-            <div class="add-to-home">
-                <h3>يجب استخدام Safari على أجهزة iOS</h3>
-                <p>لتفعيل الإشعارات على iOS قم بإضافة الموقع إلى الشاشة الرئيسية باتباع الخطوات التالية:</p>
-                <ol>
-                    <li>اضغط على زر المشاركة <span class="ios-share">⎙</span> في أسفل الشاشة</li>
-                    <li>اختر "إضافة إلى الشاشة الرئيسية"</li>
-                    <li>اضغط "إضافة" في الزاوية العليا اليمنى</li>
-                    <li>افتح الموقع من الشاشة الرئيسية</li>
-                    <li>ثم اضغط على "تفعيل الإشعارات"</li>
-                </ol>
-            </div>
-        </section>
+        <div class="add-to-home">
+            <h3>يجب استخدام Safari على أجهزة iOS</h3>
+            <p>لتفعيل الإشعارات على iOS قم بإضافة الموقع إلى الشاشة الرئيسية باتباع الخطوات التالية:</p>
+            <ol>
+                <li>اضغط على زر المشاركة <span class="ios-share">⎙</span> في أسفل الشاشة</li>
+                <li>اختر "إضافة إلى الشاشة الرئيسية"</li>
+                <li>اضغط "إضافة" في الزاوية العليا اليمنى</li>
+                <li>افتح الموقع من الشاشة الرئيسية</li>
+                <li>ثم اضغط على "تفعيل الإشعارات"</li>
+            </ol>
+        </div>
     </main>
 
     <script src="script.js"></script>

@@ -13,7 +13,9 @@ body {
     color: #333;
     background: radial-gradient(circle at top, #4a6fa5, #1a1a2e);
     position: relative;
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 body::before {
     content: '';
@@ -31,38 +33,10 @@ header {
     text-align: center;
 }
 
-nav ul {
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    margin-top: 1rem;
-}
-
-nav ul li {
-    margin: 0 1rem;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 0.5rem;
-    transition: color 0.3s;
-}
-
-nav a:hover {
-    color: #ccc;
-}
-
 main {
     max-width: 800px;
     margin: 0 auto;
     padding: 2rem;
-}
-
-section {
-    margin-bottom: 2rem;
-    padding: 0;
 }
 
 h2 {
@@ -122,6 +96,14 @@ button:hover {
 button:disabled {
     background-color: #a0aec0;
     cursor: not-allowed;
+}
+
+button:disabled:hover {
+    background-color: #a0aec0;
+}
+
+button:disabled:hover {
+    background-color: #a0aec0;
 }
 
 .notification-btn {
@@ -206,20 +188,6 @@ button:disabled {
 .status-info {
     background-color: #fff3cd;
     color: #856404;
-}
-
-@media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-    }
-    
-    nav ul li {
-        margin: 0.5rem 0;
-    }
-
-    body {
-        height: 100%;
-    }
 }
 
 /* Display the add-to-home instructions only on mobile devices */
