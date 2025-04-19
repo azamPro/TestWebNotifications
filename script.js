@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let permission = await window.OneSignal.Notifications.permission;
             if (permission) {
                 updateStatus('تم الاشتراك بنجاح!', 'granted'); // Successfully subscribed to notifications!
+                updateStatus('تم الاشتراك بنجاح!', 'granted'); // Successfully subscribed to notifications!
                 notificationBtn.textContent = 'الإشعارات مفعلة'; // Notifications Enabled
                 notificationBtn.disabled = true;
             } else {

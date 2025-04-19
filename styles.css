@@ -102,6 +102,10 @@ button:disabled:hover {
     background-color: #a0aec0;
 }
 
+button:disabled:hover {
+    background-color: #a0aec0;
+}
+
 .notification-btn {
     background-color: #4F9D69;
     font-size: 1.1rem;
