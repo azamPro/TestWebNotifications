@@ -35,12 +35,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
-            updateStatus('طلب تفعيل الإشعارات..', 'info');
-
+            
             // Wait for OneSignal to be ready
             console.log("Debugging: ", "Checking with OneSignal");
-            await CallOneSignal();
+            
+            
+            updateStatus('طلب تفعيل الإشعارات..', 'info');
 
+            await CallOneSignal();
             // Request notification permission through OneSignal
             const notificationPermission = await window.OneSignal.Notifications.permission;
             
@@ -48,17 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateStatus('انت مشترك من قبل!', 'granted'); // You are already subscribed to notifications!
             } else {
                 // Request permission
-                console.log("Debugging: ", "Requesting Permission...");
+                console.log("Debugging: ", "Requestion Notification Permission...");
+                await window.OneSignal.Notifications.requestPermission();
+
                 const newPermission = await window.OneSignal.Notifications.permission;
                 if (newPermission) {
-
-                    // Get user ID to identify this device/user
-                    const userId = await window.OneSignal.User.getOneSignalId();
-                    console.log('OneSignal User ID:', userId);
-                    
                     // Update permission status display
                     checkNotificationPermission();
-
                 } else {
                     updateStatus('تم رفض طلب الإشعارات الرجاء تفعيل الإشعارات في الإعدادات', 'denied'); // Notification permission was denied. Please enable notifications in your browser settings.
                     checkNotificationPermission();
