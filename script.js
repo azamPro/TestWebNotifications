@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Check if running as PWA on iOS
         if (isIOS && !isInStandaloneMode()) {
+            alert('لتفعيل الإشعارات على أجهزة iOS، يُرجى إضافة هذا الموقع إلى الشاشة الرئيسية أولاً، ثم فتحه من الشاشة الرئيسية.')
             updateStatus('لتفعيل الإشعارات على أجهزة iOS، يُرجى إضافة هذا الموقع إلى الشاشة الرئيسية أولاً، ثم فتحه من الشاشة الرئيسية.', 'denied');
             return;
         }
@@ -51,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let permission = await window.OneSignal.Notifications.permission;
             if (permission) {
-                updateStatus('تم الاشتراك بنجاح!', 'granted'); // Successfully subscribed to notifications!
                 updateStatus('تم الاشتراك بنجاح!', 'granted'); // Successfully subscribed to notifications!
                 notificationBtn.textContent = 'الإشعارات مفعلة'; // Notifications Enabled
                 notificationBtn.disabled = true;
