@@ -25,6 +25,9 @@ body::before {
     z-index: -1;
 }
 
+#Event_logo {
+    display: none;
+}
 
 header {
     background-color: #4a6fa5;

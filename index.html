@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>حفل مشاريع التخرج</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="/assets/facicon-500x500.png" type="image/png">
     <link rel="manifest" href="manifest.json">
@@ -14,20 +18,38 @@
     <meta name="theme-color" content="#0b0c15">
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
-      window.OneSignalDeferred = window.OneSignalDeferred || [];
-      OneSignalDeferred.push(async function(OneSignal) {
-        await OneSignal.init({
-          appId: "25ed62bf-67ca-4720-b1dc-a4613d7de1b7",
-          safari_web_id: "web.onesignal.auto.25ed62bf-67ca-4720-b1dc-a4613d7de1b7",
-          notifyButton: {
-            enable: false,
-          },
-          allowLocalhostAsSecureOrigin: true,
+        window.OneSignalDeferred = window.OneSignalDeferred || [];
+        OneSignalDeferred.push(async function (OneSignal) {
+            await OneSignal.init({
+                appId: "25ed62bf-67ca-4720-b1dc-a4613d7de1b7",
+                safari_web_id: "web.onesignal.auto.25ed62bf-67ca-4720-b1dc-a4613d7de1b7",
+                notifyButton: {
+                    enable: false,
+                },
+                allowLocalhostAsSecureOrigin: true,
+            });
         });
-      });
     </script>
 </head>
+
 <body>
+
+    <!---------------------- Evnent Logo (currently Hidden) ---------------------->
+    <div dir="ltr" id="Event_logo"
+        class="[direction:ltr] w-full flex flex-row flex-wrap items-start justify-center gap-4 px-4">
+        <div class="text-center leading-snug">
+            <p class="text-lg sm:text-2xl font-bold text-[#2d2a66] tracking-wide mb-1.5"
+                style="font-family: 'Tajawal', sans-serif;">
+                ملتقى كلية الحاسب العلمي الثاني
+            </p>
+            <p class="text-lg sm:text-2xl font-bold text-[#2d2a66] tracking-wide">
+                Second Scientific Event of COC
+            </p>
+        </div>
+        <img src="/assets/logo.png" alt="COC Logo" class="flex-shrink-0 -mt-7 h-20 sm:h-[6rem] w-auto">
+    </div>
+    <!---------------------- Evnent Logo (currently Hidden) ---------------------->
+
     <main>
         <div class="intro-header">
             <h2>مرحبا بك في حفل مشاريع التخرج</h2>
@@ -56,19 +78,44 @@
         </div>
     </main>
 
+
+    <!------------------------------ Project Showcase section ------------------------------>
+    <div id="card-container" class="[direction:ltr] mx-auto grid gap-8 place-items-center grid-cols-[repeat(auto-fit,minmax(16rem,1fr))] max-w-[52rem]"></div>
+    <!-- Card template -->
+    <template id="card-tpl">
+        <div class="[direction:ltr] border rounded-lg shadow-md bg-white overflow-hidden w-full max-w-[16rem]">
+            <div class="p-4">
+                <h2 id="card-title" class="text-base font-bold text-gray-800"></h2>
+
+                <div class="w-4/5 mt-2">
+                    <span id="card-dept"
+                        class="block bg-blue-200 text-blue-900 text-sm font-semibold px-3 py-0.5 rounded"></span>
+                </div>
+
+                <div id="card-tags" class="flex flex-wrap gap-1.5 mt-2"></div>
+            </div>
+
+            <div class="relative">
+                <img id="card-image" class="w-full object-cover" />
+            </div>
+        </div>
+    </template>
+    <!-- Card template -->
+
     <script src="script.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
+            window.addEventListener('load', function () {
                 navigator.serviceWorker.register('/OneSignalSDKWorker.js')
-                    .then(function(registration) {
+                    .then(function (registration) {
                         console.log('ServiceWorker registration successful with scope: ', registration.scope);
                     })
-                    .catch(function(error) {
+                    .catch(function (error) {
                         console.log('ServiceWorker registration failed: ', error);
                     });
             });
         }
     </script>
 </body>
+
 </html>
