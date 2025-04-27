@@ -104,7 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function add_projects_html(projects) {
-        projects.forEach(p => {
+        //                                          start, end, Number_of_projects_to_show
+        const randomNumbers = generateRandomNumbers(1, 71, 0);
+        const selectedItems = randomNumbers.map(n => projects[n - 1]); 
+        selectedItems.forEach(p => {
             const card = tpl.content.cloneNode(true);
     
             /* fill title + section -------------------------------------------------- */
@@ -145,6 +148,15 @@ document.addEventListener('DOMContentLoaded', () => {
           console.error('Error fetching JSON:', error);
           return null;
         }
+      }
+
+      function generateRandomNumbers(min, max, count) {
+        const nums = new Set();
+        while (nums.size < count) {
+          const rand = Math.floor(Math.random() * (max - min + 1)) + min;
+          nums.add(rand);
+        }
+        return Array.from(nums);
       }
     
 }); 
