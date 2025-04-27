@@ -3,6 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const permissionStatus = document.getElementById('permission-status');
     const addToHomeInstructions = document.querySelector('.add-to-home');
     
+
+    const cards_container = document.getElementById("cards-container");
+    const tpl = document.getElementById('card-tpl');
+    const parent = document.getElementById('card-container');
+
+
     // Check if running as installed PWA on iOS
     function isInStandaloneMode() {
         return (
@@ -90,4 +96,55 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+//====================================Project Showcase Section================================
+
+    load_projects('projects.json').then(projects => {
+        add_projects_html(projects)
+    });
+
+    function add_projects_html(projects) {
+        projects.forEach(p => {
+            const card = tpl.content.cloneNode(true);
+    
+            /* fill title + section -------------------------------------------------- */
+            card.querySelector('#card-title').textContent = p["Project Title"];
+            card.querySelector('#card-dept').textContent = p["Department"];
+    
+            /* robust tag handling --------------------------------------------------- */
+            const raw = p["Project Field"] ?? "";                       // may be array or string
+            const tags = Array.isArray(raw)
+                ? raw
+                : raw.split(',').map(t => t.trim()).filter(Boolean);
+    
+            const tagBox = card.querySelector('#card-tags');
+            tags.forEach(tag => tagBox.insertAdjacentHTML(
+                'beforeend',
+                `<span class="bg-black/90 text-white text-xs font-semibold px-2 py-0.5 rounded">${tag}</span>`
+            ));
+    
+            /* poster image ---------------------------------------------------------- */
+            const img = card.querySelector('#card-image');
+            img.src = p["Project Poster"];
+            img.alt = p["Project Title"];
+
+            parent.appendChild(card);                                     // add to page
+        });
+    }
+
+
+    async function load_projects(filePath) {
+        try {
+          const response = await fetch(filePath);
+          if (!response.ok) {
+            throw new Error('Failed to fetch JSON');
+          }
+          const data = await response.json();
+          return data;
+        } catch (error) {
+          console.error('Error fetching JSON:', error);
+          return null;
+        }
+      }
+    
 }); 
