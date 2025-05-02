@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حفل مشاريع التخرج</title>
+    <title>ملتقى كلية الحاسب العلمي الثاني</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
         rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -61,9 +61,10 @@
     <!---------------------- Evnent Logo (currently Hidden) ---------------------->
 
     <main>
-        <div class="intro-header">
-            <h2>مرحبا بك في حفل مشاريع التخرج</h2>
+        <div class="intro-header text-center">
+            <h2>مرحبا بك في ملتقى كلية الحاسب العلمي الثاني</h2>
             <p>ستعيش الآن تجربة حية لمعرفة كل ما يحدث في الحفل</p>
+            <p>اضغط الزر الذي بالأسفل من اجل تفعيل الاشعارات</p>
         </div>
 
         <div class="notification-actions">
@@ -90,7 +91,7 @@
 
 
     <!------------------------------ Project Showcase section ------------------------------>
-    <div id="card-container" class="[direction:ltr] mx-auto grid gap-8 place-items-center grid-cols-[repeat(auto-fit,minmax(16rem,1fr))] max-w-[52rem]"></div>
+    <div id="card-container" class="[direction:ltr] mx-auto grid gap-8 items-start justify-center grid-cols-[repeat(auto-fit,minmax(16rem,1fr))] max-w-[52rem]"></div>
     <!-- Card template -->
     <template id="card-tpl">
         <div class="[direction:ltr] border rounded-lg shadow-md bg-white overflow-hidden w-full max-w-[16rem]">
@@ -111,6 +112,16 @@
         </div>
     </template>
     <!-- Card template -->
+    <section id="random-projects" class="py-12 px-6 text-center">
+        <h2 class="text-2xl font-bold text-white mb-6">مشاريع مميزة</h2>
+        <div id="random-projects-container" class="grid gap-8 place-items-center grid-cols-[repeat(auto-fit,minmax(16rem,1fr))] max-w-[64rem] mx-auto"></div>
+        
+        <a href="https://project-showcase-mu.vercel.app/" target="_blank" class="mt-6 inline-block bg-blue-600 text-white font-semibold px-6 py-2 rounded hover:bg-blue-700 transition">
+          عرض المزيد من المشاريع
+        </a>
+      </section>
+      
+      
 
     <script src="script.js"></script>
     <script>
@@ -118,13 +129,15 @@
             window.addEventListener('load', function () {
                 navigator.serviceWorker.register('/OneSignalSDKWorker.js')
                     .then(function (registration) {
-                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                        //console.log('ServiceWorker registration successful with scope: ', registration.scope);
                     })
                     .catch(function (error) {
-                        console.log('ServiceWorker registration failed: ', error);
+                        //console.log('ServiceWorker registration failed: ', error);
                     });
             });
         }
+
+        
     </script>
 </body>
 

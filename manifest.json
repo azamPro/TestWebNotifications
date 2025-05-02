@@ -1,7 +1,7 @@
 {
   "name": "Web Notifications App",
   "short_name": "إشعارات الحفل",
-  "description": "تطبيق بسيط لإرسال إشعارات حيّة اثناء حفل مشاريع التخرج",
+  "description": "تطبيق بسيط لإرسال إشعارات حيّة اثناء ملتقى كلية الحاسب العلمي الثاني",
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#f8f9fa",

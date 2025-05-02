@@ -7,23 +7,25 @@
 
 
 body {
-    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
     font-family: 'Cairo', sans-serif;
     line-height: 1.6;
-    color: #333;
-    background: radial-gradient(circle at top, #4a6fa5, #1a1a2e);
+    color: #fff;
+    background: url('/assets/background.png') no-repeat center center fixed;
+    background-size: cover;
     position: relative;
-    height: 100%;
     min-height: 100vh;
     overflow-x: hidden;
+    z-index: 0;
 }
+
 body::before {
     content: '';
-    position: absolute;
+    position: fixed;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.75); /* black overlay at 50% */
     z-index: -1;
 }
+
 
 #Event_logo {
     display: none;
