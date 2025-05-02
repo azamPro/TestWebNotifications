@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const addToHomeInstructions = document.querySelector('.add-to-home');
     
 
-    const cards_container = document.getElementById("cards-container");
     const tpl = document.getElementById('card-tpl');
-    const parent = document.getElementById('card-container');
+    // const parent = document.getElementById('card-container');
+    const parent = document.getElementById('random-projects-container');
 
 
     // Check if running as installed PWA on iOS
@@ -100,13 +100,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //====================================Project Showcase Section================================
 
-    load_projects('projects.json').then(projects => {
-        add_projects_html(projects)
-    });
+load_projects('projects.json').then(projects => {
+    const randomNumbers = generateRandomNumbers(1, projects.length, 4); // ✅ Fix this
+    const selectedItems = randomNumbers.map(n => projects[n - 1]); 
+    add_projects_html(selectedItems); // ✅ pass only 4
+});
 
     function add_projects_html(projects) {
         //                                          start, end, Number_of_projects_to_show
-        const randomNumbers = generateRandomNumbers(1, 71, 0);
+        const randomNumbers = generateRandomNumbers(1, projects.length, 4);
         const selectedItems = randomNumbers.map(n => projects[n - 1]); 
         selectedItems.forEach(p => {
             const card = tpl.content.cloneNode(true);
