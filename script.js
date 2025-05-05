@@ -2,6 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const notificationBtn = document.getElementById('notificationBtn');
     const permissionStatus = document.getElementById('permission-status');
     const addToHomeInstructions = document.querySelector('.add-to-home');
+
+    document.querySelector('#vote-banner svg')?.addEventListener('click', () => {
+        document.getElementById('vote-banner')?.remove();
+        document.body.style.paddingTop = '0px'; // remove the top space if needed
+    });
     
 
     const tpl = document.getElementById('card-tpl');
